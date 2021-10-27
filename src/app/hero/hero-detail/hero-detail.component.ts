@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HeroService } from 'src/app/hero.service';
 import {HERO}  from './hero'; 
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
@@ -23,5 +25,11 @@ getHero():void{
 }
 goback():void{
   this.location.back();
+}
+save():void{
+  if (this.hero){
+    this.heroservice.updateHero(this.hero)
+    .subscribe(()=>this.goback);
+  }
 }
 }
