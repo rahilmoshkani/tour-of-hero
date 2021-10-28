@@ -86,4 +86,19 @@ export class HeroService {
       catchError(this.handleError<HERO>('deleteHero'))
     );
   }
+/*GET heroes whose name contains search term */
+searchHeroes(term:string):Observable<HERO[]>{
+  if (!term.trim()) {
+    //if not search term,return empty hero array.
+    return of([]);
+  }
+
+  return this.http.get<HERO[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+    tap(X=>X.length ?
+      this.log(`found heroes matching"${term}"`);
+      this.log(`no heroes matching"${term}"`)),
+      catchError(this.handleError<HERO[]>('searchHeroes',[]))
+  );
+}
+  
 }
