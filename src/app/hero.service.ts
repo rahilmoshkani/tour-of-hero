@@ -95,7 +95,7 @@ searchHeroes(term:string):Observable<HERO[]>{
 
   return this.http.get<HERO[]>(`${this.heroesUrl}/?name=${term}`).pipe(
     tap(X=>X.length ?
-      this.log(`found heroes matching"${term}"`);
+      this.log(`found heroes matching"${term}"`):
       this.log(`no heroes matching"${term}"`)),
       catchError(this.handleError<HERO[]>('searchHeroes',[]))
   );
