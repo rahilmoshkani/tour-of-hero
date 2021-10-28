@@ -69,4 +69,11 @@ export class HeroService {
     );
   }
 
+  /**POST:add a new hero to the server  */
+  addHero(hero:HERO):Observable<HERO>{
+    return this.http.post<HERO>(this.heroesUrl, hero,this.httpOptions).pipe(
+      tap ((newHero:HERO)=>this.log(`added hero w/ id=${newHero.id}`)),
+      catchError(this.handleError<HERO>('addHero'))
+    );
+  }
 }
