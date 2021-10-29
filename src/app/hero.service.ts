@@ -21,6 +21,10 @@ export class HeroService {
   ) {}
 
   /** log a HeroService message with the MessageService*/
+  
+  private log(message: string) {
+    this.messageService.add(`HeroService:${message}`);
+  }
 
   /**GET heroes from the server */
   getHeroes(): Observable<HERO[]> {
@@ -57,9 +61,6 @@ export class HeroService {
     );
   }
 
-  private log(message: string) {
-    this.messageService.add(`HeroService:${message}`);
-  }
 
   /**PUT:update the hero on the server */
   updateHero(hero: HERO): Observable<any> {
